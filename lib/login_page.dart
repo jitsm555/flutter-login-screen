@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
+import 'util.dart';
 
 class LoginPage extends StatefulWidget {
   static String tag = 'login-page';
@@ -11,48 +12,30 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    Map<int, Color> color = {
-      50: Color.fromRGBO(147, 205, 72, .1),
-      100: Color.fromRGBO(147, 205, 72, .2),
-      200: Color.fromRGBO(147, 205, 72, .3),
-      300: Color.fromRGBO(147, 205, 72, .4),
-      400: Color.fromRGBO(147, 205, 72, .5),
-      500: Color.fromRGBO(147, 205, 72, .6),
-      600: Color.fromRGBO(147, 205, 72, .7),
-      700: Color.fromRGBO(147, 205, 72, .8),
-      800: Color.fromRGBO(147, 205, 72, .9),
-      900: Color.fromRGBO(147, 205, 72, 1),
-    };
-    MaterialColor colorCustom = MaterialColor(0xFF93cd48, color); // green color
+    MaterialColor colorCustom = getMaterialColor();
 
-    final logo = Hero(
-      tag: 'hero',
-      child: CircleAvatar(
-        backgroundColor: Colors.transparent,
-        radius: 48.0,
-        child: Image.asset('images/logo.png'),
-      ),
+    final logo = CircleAvatar(
+      backgroundColor: Colors.transparent,
+      radius: 48.0,
+      child: Image.asset('images/logo.png'),
     );
 
     final email = TextFormField(
       keyboardType: TextInputType.emailAddress,
-      autofocus: false,
-      initialValue: 'alucard@gmail.com',
+      autofocus: true,
       decoration: InputDecoration(
-        hintText: 'Email',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
+          prefixIcon: Icon(Icons.person_outline, color: Colors.grey),
+          hintText: 'Enter Email',
+          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0)),
     );
 
     final password = TextFormField(
-      autofocus: false,
-      initialValue: 'some password',
+      autofocus: true,
       obscureText: true,
       decoration: InputDecoration(
-        hintText: 'Password',
+        prefixIcon: Icon(Icons.lock_open, color: Colors.grey),
+        hintText: 'Enter Password',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
     );
 
@@ -76,11 +59,17 @@ class _LoginPageState extends State<LoginPage> {
         'Forgot password?',
         style: TextStyle(color: Colors.black54),
       ),
-      onPressed: () {},
+      onPressed: () {
+        //TODO: Add forgot password logic
+      },
     );
 
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: new AppBar(
+          automaticallyImplyLeading: false,
+          title:
+              new Text("Log In Screen", style: TextStyle(color: Colors.white))),
       body: Center(
         child: ListView(
           shrinkWrap: true,
